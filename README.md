@@ -78,3 +78,38 @@ EDA of data gave a good insight into the available data. Conclusions from the de
 7. Observations from percentile statistics has shown anomolies in data for small percentile value. Such data can be saturated or imputed.
 8. There are few variables which have almost 99% NaN values. Such variables can be discarded. A threshold of percentage of NaN values can be decided to discard the variables from the dataframe.
 9. As the data is relational, data needs to be merged in an smart way. For visualization in this EDA study left merge on the Application Train dataframe is used.
+
+## Featurization 
+[Featuriztion iPyhton Notebook](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/03_Featuriztion/Featurization.ipynb)
+
+Each of the provided dataframes data was cleaned first and then featurized. EDA observations and conclusions were used for featurization.
+
+For features were created for each of the individual dataframes:
+1. Count variables : Explains the count of considered variable wrt applicant. Eg. Count of previous applications by current client
+2. Age variables : Explains the time difference between current application and previous application. Multiple combinations such as last application, first appllication, last closed application, last defaulted application wrt current application etc. were created
+3. Velocity variables : Explains the count/ amount sum  wrt time with or without additional conditions by a client. Eg. Sum of previous loan amount not defaulted by client in last 3 years, count of various jobs performed by client in last 1 year, count of various jobs performed by client in last 1 year where loan is not defaulted etc.
+4. Decay Variables : Exponential decay of variables such as amount paid in each of last 1 year per month This gives higher imortance to the recent information.
+5. Categorical variable encoding : Various encoding methods were used such as label encoding, one hot encoding and frequency encoding.
+6. Aggregation techniques : Various combinations of continous variables such as simple moving average, exponential moving averae, weighted moving average and their combination wrt min, max, last, first etc. were used.
+
+Once the individual dataframes were featurized, they were left joined on the Application Train and Application Test dataframes. **1770** different variables were created in the featurization.
+- Application train merged dataframe shape was  (307511, 1772)
+- Application test merged dataframe shape was  (48744, 1771)
+
+### EDA of Merged Dataframe:
+Correlation between variable and Target variable sorted in descending order were :
+
+TARGET                              1.000000
+EXT_SOURCE_2                        0.159029
+EXT_SOURCE_3                        0.119572
+EXT_SOURCE_MUL                      0.088886
+DAYS_CREDIT_MEAN                    0.083960
+EXT_SOURCE_MIN                      0.081264
+DAYS_BIRTH                          0.078239
+CREDIT_ACTIVE_CLOSED_MEAN           0.076500
+NAME_CONTRACT_STATUS_MEAN_ALL       0.073213
+DAYS_CREDIT_MAX                     0.072869
+NAME_CONTRACT_STATUS_MEAN_LAST_5    0.070471
+
+Variables of merged application train dataframe did not shown a linear behavior with the Target. There were large number of variables which shown a very less correlation (<0.06) wrt Target.
+
