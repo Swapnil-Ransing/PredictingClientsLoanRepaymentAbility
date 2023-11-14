@@ -129,7 +129,7 @@ The weight of evidence (WoE) tells the predictive power of a single feature conc
 ### 3. Min max scaling and SMOTE data:
 Train data is scaleed between 0 to 1 and its transformation is applied on the test and oot data. Also since the target label is imbalanced, synthetic defaulter client target points were created using SMOTE technique for train.
 
-### 3. Top 15 feature selection using count of votes:
+### 4. Top 15 feature selection using count of votes:
 From th top 40 selected features further 15 features were selected by count of votes method. In this for each of the machine learning algorithm top 15 features were given a vote by each algorithm based on  feature importance and finally votes for each variable is counted and top 15 voted variables were selected. Following were the algorithms used for voting:
 1. Recursive feature elimination with Logisticregression
 2. Correlation
@@ -141,7 +141,7 @@ From th top 40 selected features further 15 features were selected by count of v
 8. Extra tree classifier
 9. Permutation importance
 
-Following top 15 features were selected :
+### Following top 15 features were selected :
 
 | Variable Name | Information Value | Count of Votes | Variable Description |
 | --- | --- | --- | --- |
@@ -160,3 +160,22 @@ Following top 15 features were selected :
 | REGION_POPULATION_RELATIVE |0.042427	 | 6 | Normalized population of region where client lives (higher number means the client lives in more populated region) |
   | DAYS_LAST_PHONE_CHANGE | 0.042783 | 6 | How many days before application did client change phone |
 | EMPLOYED_TO_AGE_RATIO | 0.083327 | 6 | Ratio of how many days before the application the person started current employment by client's age in days wrt current application |
+
+## Modeling and Results:
+[Modeling iPyhton Notebooks Folder](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/tree/main/05_Modeling)
+Various models including machine learning and deep learning models were implemented on the final set of variables. These models hyperparameters were tuned to achieve the best performance of ROC AUC. Following is the summary result of these models:
+| Model Number |	Model Name |	OOT ROC AUC	| OOT Defaulter Capture at 20% Operating range	| Kaggle Private Score	| Kaggle Public Score	| Predicion Latency	| Probability Distribution |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|1	|Logistic Regression |	71.95% |	45.96% |	70.28% |	70.49% |	Low	 | Good |
+|2	|SGD |	71.93% |	45.83% |	70.16% |	70.34% |	Low |	Good
+|3	|Adaboost |	75.68% |	52.52% |	74.02% |	74.65% |	Low |	Ok |
+|4	|XGBoost |	75.43% |	51.90% |	73.29% |	73.39% |	Low |	Poor |
+|5	|LightGbm |	75.97% |	52.56% |	74.47% |	74.20% |	Low |	Ok |
+|6	|MLP |	73.85% |	50.33% |	72.28% |	72.67% |	Low |	Poor |
+
+**Observations and Conclusions:**
+1. Logistic regression and SGD model gave a good probability distribution across the deciles. This will be helpful in developing scorecard as scores will also be well distributed helping developing the strategies. 
+2. Adaboost, XGBoost and LightGbm model gave a high performance on OOT data, shown a good defaulter capture rate at 20% operating range. These also gave a high predictions on the kaggle datasets.
+3. MLP models performance is lower than the Adaboost, XGbost and Lightgbm models.
+4. All the models prediction latency is low. As the model uses only 15 selected features for prediction and a single model.
+
