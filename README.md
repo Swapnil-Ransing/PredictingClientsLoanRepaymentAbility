@@ -115,3 +115,13 @@ Correlation between variable and Target variable sorted in descending order were
 
 Variables of merged application train dataframe did not shown a linear behavior with the Target. There were large number of variables which shown a very less correlation (<0.06) wrt Target.
 
+## Feature Selection: 
+[Feature Selection iPyhton Notebook](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/04_Feature_Selection/FeatureSelection.ipynb)
+
+Featurization produced 1770 features, however all of these features should not be used in the machine learning model. It was necessary to understand the most important features amongst these 1770 features which would be useful for better predictions. Following steps were taken to get the importatnt 15 features for classification task:
+
+### 1. Data cleaning of merged dataframe:
+
+### 2. Top 40 feature selection using Information Value:
+
+### 3. Top 15 feature selection using count of votes:
