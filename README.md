@@ -191,9 +191,31 @@ The mentioned notebook demonstrate the procedure to develope a risk scorecard an
 
 As the Adaboost model shown a good probability distribution and high deafulter capture rate at 20% operating range of the oot data, Adaboost model was used for for developing the scorecard. After tuning the PDO calibration parameters, aligned score equation obtained for this model was :
 
-**Aligned Score Equation is= 719.948 - -1531.484*score**
+**Aligned Score= 719.948 - -1531.484*score**
+
 where, score is log(odds).
 
-Following distribution of percentage transaction in each bucket is obtained for train, test and oot:
+Following distribution of various metrics in each aligned score bucket is obtained for train, test and oot:
 
+![RiskScoreStrategy Image](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/07_ReferenceImages/RiskScoreStrategy.JPG)
 
+### Observations from risk scores are :
+    1. Obtained well distribution of cummulative percentage of total transactions and cummulative percentage of bad transactions throught the score range (300-999).
+    2. Scorecard shows similar distribution for train, test and oot data.
+    3. Percentage of total applicants in each bucket is not greater than 10%. Also this graph is left skewed indicating higher applicants with lower scores.
+    4. Cumulative percentage of total applicants are 40% for score around 550.
+    5. Cumulative bad rate is 80% for score around 550.
+    6. Good by bad ratio is higher for lower scores indicating higher good transactions at lower score values.
+
+### Risk Strategy:
+A simple risk strategy can be developed which can aim at reducing giving loans to defaulters, giving loan to the good population based on the risk scorecard. 
+
+Eg.
+
+| Decision | Score Range | % Total Applicants | % Bad out of Total Applicant | % of Bad out of total Bad Applicant |
+| --- | --- | --- | --- | --- |
+| Direct Approval | 300< Score <= 500 | 40% | 1.5% |  20% |
+| Manual Review | 500 <Score <= 560 | 40% | 2.9% | 36.4% |
+| Direct Decline | Score > 560 | 20% | 3.5% | 43.6% | 
+
+This strategy can be refined and approval percentage can further be increased by clubing the scores with other variables (applicants attribute) like amount of loan, age of applicant etc.
