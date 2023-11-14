@@ -121,7 +121,42 @@ Variables of merged application train dataframe did not shown a linear behavior 
 Featurization produced 1770 features, however all of these features should not be used in the machine learning model. It was necessary to understand the most important features amongst these 1770 features which would be useful for better predictions. Following steps were taken to get the importatnt 15 features for classification task:
 
 ### 1. Data cleaning of merged dataframe:
+Removed 352 columns from merged dataframe which has >99% frequency of a single value. After this, train merged dataframe splitted into train, test and oot. 
 
-### 2. Top 40 feature selection using Information Value:
+### 2. Top 40 feature selection using Weight of Evidence and Information Value:
+The weight of evidence (WoE) tells the predictive power of a single feature concerning its independent feature. If any of the categories/bins of a feature has a large proportion of events compared to the proportion of non-events, we will get a high value of WoE which in turn says that that class of the feature separates the events from non-events. WoE value tells us the predictive power of each bin of a feature. However, information value (IV) represents the entire feature’s predictive power. IV values of each feature were manually analyzed and top 40 different features were selected.
+
+### 3. Min max scaling and SMOTE data:
+Train data is scaleed between 0 to 1 and its transformation is applied on the test and oot data. Also since the target label is imbalanced, synthetic defaulter client target points were created using SMOTE technique for train.
 
 ### 3. Top 15 feature selection using count of votes:
+From th top 40 selected features further 15 features were selected by count of votes method. In this for each of the machine learning algorithm top 15 features were given a vote by each algorithm based on  feature importance and finally votes for each variable is counted and top 15 voted variables were selected. Following were the algorithms used for voting:
+1. Recursive feature elimination with Logisticregression
+2. Correlation
+3. Lasso with logistic regression
+4. Recursive feature elimination with decision tree
+5. Recursive feature elimination with random forest
+6. Recursive feature elimination with gradient boosting classifier
+7. Recursive feature elimination with Perceptron
+8. Extra tree classifier
+9. Permutation importance
+
+Following top 15 features were selected :
+
+| Variable Name | Information Value | Count of Votes | Variable Description |
+| --- | --- | --- | --- |
+| EXT_SOURCE_2 |0.318135 | 9 | Normalized score from external data source |
+| EXT_SOURCE_3 |0.246297	 | 9 | Normalized score from external data source |
+| DAYS_PAYMENT_RATIO_MAX_Latest_year |0.076490 | 8 | Maximum value from ratio of previous credit pay date to the actual payment date wrt current application for last one year |
+| AMT_GOODS_PRICE |0.095468 | 8 | Goods price of good that client asked for (if applicable) on the previous application|
+| CNT_DRAWINGS_ATM_CURRENT_MAX_Latest_year |0.044054 | 8 | Max value from count of ATM drawings during a last year month on the previous credit |
+| EXT_SOURCE_1 |0.110553 | 8 | Normalized score from external data source |
+| DAYS_DETAILS_CHANGE_MUL |0.052973	 | 7 | Multiplication of how many days before the application did client (changed the phone, changed the registration, change the identity document) with which he applied for the loan |       
+| AMT_CREDIT |0.052588 | 7 | Credit amount of the loan|
+| DAYS_BIRTH |	0.083650	 | 7 | Client's age in days at the time of application |
+| DEF_60_CREDIT_RATIO |0.055447 | 7 | Ratio of Credit amount of the loan by how many observation of client's social surroundings defaulted on 60 (days past due) DPD |
+| AMT_PAYMENT_DIFF_MAX_Latest_year |0.050351	 | 6 | Max difference between the prescribed installment amount of previous credit and the actual amount paid over the last year |
+| INTEREST_SHARE_MEAN_LAST_5 |0.053174 | 6 | mean ratio of (Credit amount* Term* annuity) of previous loan by credit amount of the loan for last 5 month |                         
+| REGION_POPULATION_RELATIVE |0.042427	 | 6 | Normalized population of region where client lives (higher number means the client lives in more populated region) |
+  | DAYS_LAST_PHONE_CHANGE | 0.042783 | 6 | How many days before application did client change phone |
+| EMPLOYED_TO_AGE_RATIO | 0.083327 | 6 | Ratio of how many days before the application the person started current employment by client's age in days wrt current application |
