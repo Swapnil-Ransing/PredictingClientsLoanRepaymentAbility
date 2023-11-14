@@ -163,6 +163,7 @@ From th top 40 selected features further 15 features were selected by count of v
 
 ## Modeling and Results:
 [Modeling iPyhton Notebooks Folder](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/tree/main/05_Modeling)
+
 Various models including machine learning and deep learning models were implemented on the final set of variables. These models hyperparameters were tuned to achieve the best performance of ROC AUC. Following is the summary result of these models:
 | Model Number |	Model Name |	OOT ROC AUC	| OOT Defaulter Capture at 20% Operating range	| Kaggle Private Score	| Kaggle Public Score	| Predicion Latency	| Probability Distribution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -178,4 +179,21 @@ Various models including machine learning and deep learning models were implemen
 2. Adaboost, XGBoost and LightGbm model gave a high performance on OOT data, shown a good defaulter capture rate at 20% operating range. These also gave a high predictions on the kaggle datasets.
 3. MLP models performance is lower than the Adaboost, XGbost and Lightgbm models.
 4. All the models prediction latency is low. As the model uses only 15 selected features for prediction and a single model.
+
+## Risk Scorecard and Risk Strategy Development:
+[Risk Scorecard example iPyhton Notebook](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/06_RiskScorecard/RiskScorecardDevelopment_SampleExample.ipynb)
+
+[Risk Scorecard iPyhton Notebook](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/06_RiskScorecard/LoanDefaulter_RiskScorecardDevelopment_Adaboost.ipynb)
+
+A risk score is a numerical score that is derived from the statistical analysis and represents transactions riskiness. Higher risk score corresponds to high default probability. Defining threshold for loan applicants acceptance decision, based on the developed models prediction probabilities will be challenging as transactions predicted probabilities will be tightly placed between small scale. So, it necessitates the scaling methodology which can scale the predicted probabilities to a large range of scores. 
+
+The mentioned notebook demonstrate the procedure to develope a risk scorecard and also provides an interactive user interface to tune the PDO calibration values.
+
+As the Adaboost model shown a good probability distribution and high deafulter capture rate at 20% operating range of the oot data, Adaboost model was used for for developing the scorecard. After tuning the PDO calibration parameters, aligned score equation obtained for this model was :
+
+**Aligned Score Equation is= 719.948 - -1531.484*score**
+where, score is log(odds).
+
+Following distribution of percentage transaction in each bucket is obtained for train, test and oot:
+
 
