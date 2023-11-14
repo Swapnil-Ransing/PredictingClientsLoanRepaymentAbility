@@ -222,6 +222,7 @@ Eg.
 This strategy can be refined further and approval percentage can further be increased by clubing the scores with other variables (applicants attribute) like amount of loan, age of applicant etc.
 
 ## Scope for Improvement :
-1. Ensemble modelig techniques can be tried out in the modeling to achieve the higher ROC AUC.[Kaggle Third Place Solution](https://www.kaggle.com/c/home-credit-default-risk/discussion/64596)
-2. Modeling technique such as: Clustering the data by using clustering algorithm and then using the machine learning algorithm on clusters to achieve the higher ROC AUC. [Research paper link](https://cs229.stanford.edu/proj2019aut/data/assignment_308832_raw/26644913.pdf)
-3. Refining the stragy using combination of aligned score and applicants attribute.
+1. Improving F1 score and confusion matrix.
+2. Ensemble modelig techniques can be tried out in the modeling to achieve the higher ROC AUC.[Kaggle Third Place Solution](https://www.kaggle.com/c/home-credit-default-risk/discussion/64596)
+3. Modeling technique such as: Clustering the data by using clustering algorithm and then using the machine learning algorithm on clusters to achieve the higher ROC AUC. [Research paper link](https://cs229.stanford.edu/proj2019aut/data/assignment_308832_raw/26644913.pdf)
+4. Refining the stragy using combination of aligned score and applicants attribute.
