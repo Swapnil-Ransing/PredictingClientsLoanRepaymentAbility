@@ -41,11 +41,11 @@ Target distribution on the data has shown that the data is imbalanced with aroun
 
 ![Target Distribution Image](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/07_ReferenceImages/TargetDistribution.JPG)
 
-**Following is a sample of NAME_INCOME_TYPE categorical variable EDA:**
+### Following is a sample of NAME_INCOME_TYPE categorical variable EDA:
 
 ![Target Distribution Image](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/07_ReferenceImages/NameIncomeType1.JPG)
 ![Target Distribution Image](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/07_ReferenceImages/NameIncomeType2.JPG)
-![Target Distribution Image](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/07_ReferenceImages/NameIncomeType2.JPG)
+![Target Distribution Image](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/07_ReferenceImages/NameIncomeType3.JPG)
 
 **Observations and conclusions:**
 1. For income type categorical variable total categories are 8 and all the samples are categorized i.e. none of the sample have NaN value.
@@ -53,3 +53,28 @@ Target distribution on the data has shown that the data is imbalanced with aroun
 3. Similar distribution of defaulters is also observed from the pie chart as observed in the count bar plot. Working constitute 61% of total defaulted applicant. For commercial associate this number is 22% and for pensioners it is 12%.
 4. If we look for percentage of defaulters for each category, maternity leave and unemployed income type shows the highest defaulters. However for this categories count of applicant is almost 0. For students, there is not a single defaulters and applicant are almot 0%.
 5. For smalller count, decision can be taken to combine these categories while featurizing.
+
+### Following is a sample of EXT_SOURCE_3 continuous variable EDA:
+
+![Target Distribution Image](https://github.com/Swapnil-Ransing/PredictingClientsLoanRepaymentAbility/blob/main/07_ReferenceImages/EXT_SOURCE_3.JPG)
+
+**Observations and Conclusions :**
+1. This variable represents the normalized score of application from external data source.
+1. Row samples of EXT_SOURCE_3 continuous variable have 19.83% have NaN values. Out of these NaN valued row samples, around 90.69% are non defaulters while 9.31% are defaulters.
+2. Probability density plot of non defaulters is left skewed while that of defaulters is right skewed.Range of values for both of these categories lies between 0 to 0.9 .
+3. Intequertile range of non defaulters box plot is from 0.39 to 0.68 while that of defaulters is from 0.22 to 0.52. This is an evident that for smaller values of this variable, there are more chances of defaulting the loan.
+4. Median values of non defaulters is higher than the defaulter. This value can be used for imputing the NaN samples.
+
+### CONCLUSIONS FROM EDA:
+EDA of data gave a good insight into the available data. Conclusions from the descriptive statistics, correlation coefficients and variable plots observations are as follows:
+
+1. Data is imbalanced. There are almost 92% of non defaulters and 8% defaulters. We will have to come up with sampling techniques while building the model.
+2. Week correlation is observed for most of the variables and target label. This represent that the data is not linearly correlated. High order featurization can be used to improve model performance for classification.
+2. Few of the variables have shown a good linear correlation wrt target label data. These features will be important for the classification task.
+3. Few of the variables have number of days samples. Value range of these samples is high.(Eg. 0 to 1,00,000). Such variables can be transformed into years or month data for efficient computation. This transformation is also used in EDA for better visualization and observations.
+4. Few of the continuous variables shows anamolies. (Eg. Count of days wrt application date should be negative, however few percentile of data has these values as positive. Also for some samples count of days does not make sense.) These anamolies should be dealt either by saturating the values to the nearest possible values or by imputation.
+5. It is also been onserved that, for some single categorical variables, there are multiple categories with 0% count. Such categories can be grouped together for dimensionality reduction.
+6. For variables where we observ a different median values of defaulter and non defaulter categoris, NaN values of such variables can be imputed by corresponding median values.
+7. Observations from percentile statistics has shown anomolies in data for small percentile value. Such data can be saturated or imputed.
+8. There are few variables which have almost 99% NaN values. Such variables can be discarded. A threshold of percentage of NaN values can be decided to discard the variables from the dataframe.
+9. As the data is relational, data needs to be merged in an smart way. For visualization in this EDA study left merge on the Application Train dataframe is used.
