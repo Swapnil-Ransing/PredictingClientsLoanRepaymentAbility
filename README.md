@@ -99,17 +99,17 @@ Once the individual dataframes were featurized, they were left joined on the App
 ### EDA of Merged Dataframe:
 Correlation between variable and Target variable sorted in descending order were :
 
-TARGET                              1.000000
-EXT_SOURCE_2                        0.159029
-EXT_SOURCE_3                        0.119572
-EXT_SOURCE_MUL                      0.088886
-DAYS_CREDIT_MEAN                    0.083960
-EXT_SOURCE_MIN                      0.081264
-DAYS_BIRTH                          0.078239
-CREDIT_ACTIVE_CLOSED_MEAN           0.076500
-NAME_CONTRACT_STATUS_MEAN_ALL       0.073213
-DAYS_CREDIT_MAX                     0.072869
-NAME_CONTRACT_STATUS_MEAN_LAST_5    0.070471
+TARGET |                              1.000000
+EXT_SOURCE_2  |                       0.159029
+EXT_SOURCE_3    |                     0.119572
+EXT_SOURCE_MUL   |                    0.088886
+DAYS_CREDIT_MEAN   |                  0.083960
+EXT_SOURCE_MIN      |                 0.081264
+DAYS_BIRTH          |                 0.078239
+CREDIT_ACTIVE_CLOSED_MEAN  |          0.076500
+NAME_CONTRACT_STATUS_MEAN_ALL  |      0.073213
+DAYS_CREDIT_MAX                  |    0.072869
+NAME_CONTRACT_STATUS_MEAN_LAST_5  |   0.070471
 
 Variables of merged application train dataframe did not shown a linear behavior with the Target. There were large number of variables which shown a very less correlation (<0.06) wrt Target.
 
